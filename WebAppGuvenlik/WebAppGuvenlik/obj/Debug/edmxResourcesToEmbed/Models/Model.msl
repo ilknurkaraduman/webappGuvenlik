@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="GuvenlikDBModelStoreContainer" CdmEntityContainer="GuvenlikDBEntities">
+    <EntitySetMapping Name="Guvenliks">
+      <EntityTypeMapping TypeName="GuvenlikDBModel.Guvenlik">
+        <MappingFragment StoreEntitySet="Guvenlik">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Ad" ColumnName="Ad" />
+          <ScalarProperty Name="Soyad" ColumnName="Soyad" />
+          <ScalarProperty Name="Tel" ColumnName="Tel" />
+          <ScalarProperty Name="KullanıcıAd" ColumnName="KullanıcıAd" />
+          <ScalarProperty Name="Sifre" ColumnName="Sifre" />
+          <ScalarProperty Name="Personel" ColumnName="Personel" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Kullanıcı">
+      <EntityTypeMapping TypeName="GuvenlikDBModel.Kullanıcı">
+        <MappingFragment StoreEntitySet="Kullanıcı">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="KullaniciAd" ColumnName="KullaniciAd" />
+          <ScalarProperty Name="Sifre" ColumnName="Sifre" />
+          <ScalarProperty Name="Tur" ColumnName="Tur" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OnayDurums">
+      <EntityTypeMapping TypeName="GuvenlikDBModel.OnayDurum">
+        <MappingFragment StoreEntitySet="OnayDurum">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Adı" ColumnName="Adı" />
+          <ScalarProperty Name="Aciklama" ColumnName="Aciklama" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Personels">
+      <EntityTypeMapping TypeName="GuvenlikDBModel.Personel">
+        <MappingFragment StoreEntitySet="Personel">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Ad" ColumnName="Ad" />
+          <ScalarProperty Name="Soyad" ColumnName="Soyad" />
+          <ScalarProperty Name="Tel" ColumnName="Tel" />
+          <ScalarProperty Name="Mail" ColumnName="Mail" />
+          <ScalarProperty Name="Tur" ColumnName="Tur" />
+          <ScalarProperty Name="KullanıcıAdi" ColumnName="KullanıcıAdi" />
+          <ScalarProperty Name="Sifre" ColumnName="Sifre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ziyaretcis">
+      <EntityTypeMapping TypeName="GuvenlikDBModel.Ziyaretci">
+        <MappingFragment StoreEntitySet="Ziyaretci">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Ad" ColumnName="Ad" />
+          <ScalarProperty Name="Soyad" ColumnName="Soyad" />
+          <ScalarProperty Name="Tel" ColumnName="Tel" />
+          <ScalarProperty Name="PersonelID" ColumnName="PersonelID" />
+          <ScalarProperty Name="ZiyaretSebebi" ColumnName="ZiyaretSebebi" />
+          <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+          <ScalarProperty Name="OnayDurumID" ColumnName="OnayDurumID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

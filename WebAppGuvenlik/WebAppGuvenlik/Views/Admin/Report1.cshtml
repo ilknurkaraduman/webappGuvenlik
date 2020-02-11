@@ -1,0 +1,65 @@
+﻿@model WebAppGuvenlik.Models.Admin.AdminTopModel
+
+@{
+    ViewBag.Title = "Report1";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<head>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<p></p>
+<p></p>
+<a class="btn btn-success" href="/Admin/Users" role="button">Back to List</a>
+<p></p>
+<h5>All Visit Records</h5>
+@Html.DropDownListFor(m => m.SelectedId, Model.UserList, "list by employee..", new { @class = "btn btn-default dropdown-toggle", @onchange = "selectedValue(this.value);", @style = "width:270px; border:3px solid #76b852;" })
+<table class="table">
+    <tr>
+        <th>Employee Name</th>
+        <th>Visitor Name</th>
+        <th>End Date</th>
+        <th>Description</th>
+        <th>Status Name</th>
+    </tr>
+    @foreach (var item in Model.StatusList)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmployeeName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VisitorName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td @(item.Name == "rejected" ? "style=background-color:red" : "")
+                @(item.Name == "confirmed" ? "style=background-color:#76b852" : "")
+                @(item.Name == "waiting" ? "style=background-color:yellow" : "")>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+        </tr>
+    }
+</table>
+<script>
+    function selectedValue(val) {
+        window.location.href = "/Admin/Report1/?selectedId=" + val;
+    };
+</script>

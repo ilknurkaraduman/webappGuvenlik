@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GuvenlikDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Guvenlik">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Ad" Type="nchar" MaxLength="10" />
+    <Property Name="Soyad" Type="nchar" MaxLength="10" />
+    <Property Name="Tel" Type="int" />
+    <Property Name="KullanıcıAd" Type="nchar" MaxLength="10" />
+    <Property Name="Sifre" Type="nchar" MaxLength="10" />
+    <Property Name="Personel" Type="nchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="Kullanıcı">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="KullaniciAd" Type="nchar" MaxLength="10" />
+    <Property Name="Sifre" Type="nchar" MaxLength="10" />
+    <Property Name="Tur" Type="nchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="OnayDurum">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Adı" Type="nchar" MaxLength="10" />
+    <Property Name="Aciklama" Type="nchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="Personel">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Ad" Type="nchar" MaxLength="10" />
+    <Property Name="Soyad" Type="nchar" MaxLength="10" />
+    <Property Name="Tel" Type="int" />
+    <Property Name="Mail" Type="nchar" MaxLength="20" />
+    <Property Name="Tur" Type="nchar" MaxLength="10" />
+    <Property Name="KullanıcıAdi" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="Sifre" Type="nchar" MaxLength="10" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Ziyaretci">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Ad" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="Soyad" Type="nchar" MaxLength="10" />
+    <Property Name="Tel" Type="int" />
+    <Property Name="PersonelID" Type="tinyint" />
+    <Property Name="ZiyaretSebebi" Type="nchar" MaxLength="30" />
+    <Property Name="Tarih" Type="smalldatetime" />
+    <Property Name="OnayDurumID" Type="tinyint" />
+  </EntityType>
+  <Association Name="FK_Guvenlik_Kullanıcı">
+    <End Role="Kullanıcı" Type="Self.Kullanıcı" Multiplicity="1" />
+    <End Role="Guvenlik" Type="Self.Guvenlik" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Kullanıcı">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Guvenlik">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Personel_Kullanıcı1">
+    <End Role="Kullanıcı" Type="Self.Kullanıcı" Multiplicity="1" />
+    <End Role="Personel" Type="Self.Personel" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Kullanıcı">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Personel">
+        <PropertyRef Name="ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ziyaretci_OnayDurum">
+    <End Role="OnayDurum" Type="Self.OnayDurum" Multiplicity="0..1" />
+    <End Role="Ziyaretci" Type="Self.Ziyaretci" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="OnayDurum">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Ziyaretci">
+        <PropertyRef Name="OnayDurumID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ziyaretci_Personel">
+    <End Role="Personel" Type="Self.Personel" Multiplicity="0..1" />
+    <End Role="Ziyaretci" Type="Self.Ziyaretci" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Personel">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Ziyaretci">
+        <PropertyRef Name="PersonelID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="GuvenlikDBModelStoreContainer">
+    <EntitySet Name="Guvenlik" EntityType="Self.Guvenlik" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Kullanıcı" EntityType="Self.Kullanıcı" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OnayDurum" EntityType="Self.OnayDurum" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Personel" EntityType="Self.Personel" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Ziyaretci" EntityType="Self.Ziyaretci" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Guvenlik_Kullanıcı" Association="Self.FK_Guvenlik_Kullanıcı">
+      <End Role="Kullanıcı" EntitySet="Kullanıcı" />
+      <End Role="Guvenlik" EntitySet="Guvenlik" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Personel_Kullanıcı1" Association="Self.FK_Personel_Kullanıcı1">
+      <End Role="Kullanıcı" EntitySet="Kullanıcı" />
+      <End Role="Personel" EntitySet="Personel" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ziyaretci_OnayDurum" Association="Self.FK_Ziyaretci_OnayDurum">
+      <End Role="OnayDurum" EntitySet="OnayDurum" />
+      <End Role="Ziyaretci" EntitySet="Ziyaretci" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ziyaretci_Personel" Association="Self.FK_Ziyaretci_Personel">
+      <End Role="Personel" EntitySet="Personel" />
+      <End Role="Ziyaretci" EntitySet="Ziyaretci" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,61 @@
+﻿@model List<WebAppGuvenlik.Models.Admin.AdminViewModel>
+@{
+    ViewBag.Title = "Report2";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<head>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <p></p>
+    <a class="btn btn-success" href="/Admin/Users" role="button">Back to List</a>
+    <p></p>
+    <h5>Employees and Their Visitors</h5>
+    <p></p>
+    <table class="table">
+        <tr>
+
+            <th>
+                <h5>Employee Id</h5>
+            </th>
+            <th>
+                <h5>Employee Name</h5>
+            </th>
+            <th>
+                <h5>Visitor Count</h5>
+            </th>
+
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmployeeId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmployeeName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VisitorCount)
+            </td>
+
+        </tr>
+        }
+    </table>
+</body>

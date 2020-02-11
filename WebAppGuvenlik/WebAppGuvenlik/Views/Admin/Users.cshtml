@@ -1,0 +1,133 @@
+﻿@model IEnumerable<WebAppGuvenlik.Models.User>
+
+@{
+    ViewBag.Title = "Users";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@*<i class="fas fa-user-plus"></i>*@
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="~/Content/css/holder.min.js"></script>
+    <link href="~/Content/css/style.css" rel="stylesheet" />
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .search {
+            width: 100%;
+            position: relative;
+            display: flex;
+        }
+        .searchButton {
+            width: 40px;
+            height: 36px;
+            border: 1px solid #00B4CC;
+            background: #00B4CC;
+            text-align: center;
+            color: #fff;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <br />
+    <a class="btn btn-success" href="/Admin/UserAdd" role="button"><i class="fa fa-user-plus"> New User</i></a>
+    <a class="btn btn-success" href="/Admin/Report1" role="button"><i class="&#xf46c;">All Visit Records »</i></a>
+    <a class="btn btn-success" href="/Admin/Report2" role="button"><i class="&#xf46c;">Employees and Their Visitors »</i></a>
+
+    @using (Html.BeginForm())
+    {
+        <br />
+        <div class="search">
+            @*Find by name: @Html.TextBox("SearchString")*@
+            @*<input type="submit" value="Search" />*@
+            <input id="SearchString" name="SearchString" type="text" value="" class="search" style='width:200px' placeholder="Find by Name/Surname..    ">
+            <button type="submit" value="Search" class="searchButton">
+                <i class="fa fa-search"></i>
+            </button>
+        </div>
+    }
+    <table class="table">
+        <tr>
+            <th>
+                @Html.ActionLink("Name", "Users", new { sortOrder = ViewBag.NameSortParm1 })
+            </th>
+            <th>
+                @Html.ActionLink("Surname", "Users", new { sortOrder = ViewBag.NameSortParm2 })
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+            <th>
+                @Html.ActionLink("Username", "Users", new { sortOrder = ViewBag.NameSortParm3 })
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Password)
+            </th>
+            <th>
+                @Html.ActionLink("User Role ID", "Users", new { sortOrder = ViewBag.NameSortParm5 })
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Surname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Mail)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Password)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserCategoryID)
+                </td>
+                <td>
+                    <i class="fa fa-pencil-square-o"></i>
+                    @Html.ActionLink("Edit", "UserEdit", new { id = item.Id }) |
+                    <i class="fa fa-trash"></i>
+                    @Html.ActionLink("Delete", "UserRemove", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </table>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+</body>

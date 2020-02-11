@@ -1,0 +1,131 @@
+﻿@model List<WebAppGuvenlik.Models.Security.VisitorsModel>
+
+@{
+    ViewBag.Title = "Visitors";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<head>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .search {
+            width: 100%;
+            position: relative;
+            display: flex;
+        }
+
+        .searchButton {
+            width: 40px;
+            height: 36px;
+            border: 1px solid #00B4CC;
+            background: #00B4CC;
+            text-align: center;
+            color: #fff;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <br />
+    <a class="btn btn-success" href="/Security/VisitorAdd" role="button"><i class="fa fa-user-plus"> New Visitor</i></a>
+    <a class="btn btn-success" href="/Security/Report1" role="button">Arriving Today »</a>
+    
+    @using (Html.BeginForm())
+    {
+        @*<p>
+                Find by name: @Html.TextBox("SearchString")
+                <input type="submit" value="Search" />
+            </p>*@
+        <br />
+        <div class="search">
+            @*Find by name: @Html.TextBox("SearchString")*@
+            @*<input type="submit" value="Search" />*@
+            <input id="SearchString" name="SearchString" type="text" value="" class="search" style='width:300px' placeholder="Find by Name/ Surname/ Status Name..">
+            <button type="submit" value="Search" class="searchButton">
+                <i class="fa fa-search"></i>
+            </button>
+        </div>
+    }
+    <table class="table">
+        <tr>
+
+            <th>
+                @Html.ActionLink("Name", "Visitors", new { sortOrder = ViewBag.NameSortParm1 })
+            </th>
+            <th>
+                @Html.ActionLink("Surname", "Visitors", new { sortOrder = ViewBag.NameSortParm2 })
+            </th>
+            <th>
+                <h5>Phone</h5>
+            </th>
+            <th>
+                <h5>Date</h5>
+            </th>
+            @*<th>
+                    @Html.ActionLink("Date", "Index", new { sortOrder = ViewBag.DateSortParm })
+
+                </th>*@
+            <th>
+                <h5>Description</h5>
+            </th>
+            <th>
+                @Html.ActionLink("Employee to Visit", "Visitors", new { sortOrder = ViewBag.NameSortParm3 })
+            </th>
+            <th>
+                @Html.ActionLink("Status Name", "Visitors", new { sortOrder = ViewBag.NameSortParm5 })
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Surname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EmployeeName)
+                </td>
+                <td @(item.VisitorStatus == "rejected" ? "style=background-color:red" : "")
+                    @(item.VisitorStatus == "confirmed" ? "style=background-color:#76b852" : "")
+                    @(item.VisitorStatus == "waiting" ? "style=background-color:yellow" : "")>
+                    @Html.DisplayFor(modelItem => item.VisitorStatus)
+                </td>
+                <td>
+                    <i class="fa fa-pencil-square-o"></i>
+                    @Html.ActionLink("Edit", "VisitorEdit", new { id = item.ID }) |
+                    <i class="fa fa-trash"></i>
+                    @Html.ActionLink("Delete", "VisitorRemove", new { id = item.ID })
+                </td>
+            </tr>
+        }
+
+    </table>
+</body>

@@ -1,0 +1,87 @@
+﻿@model List<WebAppGuvenlik.Models.Security.VisitorsModel>
+
+@{
+    ViewBag.Title = "Report1";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<head>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<p></p>
+<a class="btn btn-success" href="/Security/Visitors" role="button">Back to List</a>
+<p></p>
+@*<h5>Arriving Today</h5>*@
+<h5>Visitors Today</h5>
+<p></p>
+<table class="table">
+    <tr>
+
+        <th>
+            Name
+        </th>
+        <th>
+            Surname
+        </th>
+        <th>
+            <h5>Phone</h5>
+        </th>
+        <th>
+            <h5>Date</h5>
+        </th>
+        <th>
+            <h5>Description</h5>
+        </th>
+        <th>
+            Employee to Visit
+        </th>
+        <th>
+            Status Name
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Surname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmployeeName)
+            </td>
+            <td @(item.VisitorStatus == "rejected" ? "style=background-color:red" : "")
+                @(item.VisitorStatus == "confirmed" ? "style=background-color:#76b852" : "")
+                @(item.VisitorStatus == "waiting" ? "style=background-color:yellow" : "")>
+                @Html.DisplayFor(modelItem => item.VisitorStatus)
+            </td>
+        </tr>
+    }
+
+</table>
